@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+Name: Ozias Tumimana
+Date: 09/03/2024
+Section: CSE 190E
+This is the calculator.html page for my color contrast calculator. The purpose of this
+website is to inform the user weather their inputed background/foreground colors
+are accessible.
+-->
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="calculator.css" rel="stylesheet">
+        <script src="calculator.js"></script>
+        <title>Color Contrast Checker</title>
+    </head>
+    <body id="webpage">
+        <div id="wrapper">
+        <header class="title">
+            <h1> Color Contrast Calculator</h1>
+            <hr id="headingbreak">
+        </header>
+        <div class="userinputs">
+            <label for="backgroundcolor" class="colorlabel"><strong>Background Color:</strong>
+            </label>
+            <hr class="invisible">
+            <input type="color" id="backgroundcolor">
+            <hr class="invisible">
+            <label for="foregroundcolor" class="colorlabel"> <strong>Foreground color: </strong>
+            </label>
+            <hr class="invisible">
+            <input type="color" id="foregroundcolor">
+            <hr class="invisible">
+            <button id="log">Calculate Contrast</button>
+        </div>
+        <article class="buttonpressed">
+            <h2 id="accessiblity">Pick Two Different Colors!</h2>
+
+            <h3 id="resultratio"></h3>
+        </article>
+        <div id="box">
+            <p id="examplebox"></p>
+        </div>
+        </div>
+        <footer>
+            All &copy; belonging to 2024 Ozias Tumimana
+        </footer>
+    </body>
+</html>

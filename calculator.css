@@ -1,0 +1,75 @@
+/* Name: Ozias Tumimana
+Date: 09/03/2024
+Section: CSE 190E
+This is the calculator.css page for my color contrast calculator. The purpose of this
+page is to store design elements to make my page more asthetically pleasing. */
+
+#webpage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+}
+
+.title {
+    text-align: center;
+}
+
+#headingbreak {
+    width: 500px;
+}
+
+.userinputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.invisible {
+    border: none;
+}
+
+hr {
+    margin-bottom: 15px;
+}
+
+#colorLabel {
+    font-size: larger;
+}
+
+input {
+    width: 100px;
+    height: 50px;
+}
+
+#log {
+    margin-top: 8px;
+    width: 15em;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.buttonpressed {
+    text-align: center;
+}
+
+#resultratio {
+    font-size: xx-large;
+}
+
+.box {
+    display: flex;
+}
+
+#examplebox {
+    text-align: center;
+    text-wrap: pretty;
+}
+
+footer {
+    height: 15px;
+    width: 500px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

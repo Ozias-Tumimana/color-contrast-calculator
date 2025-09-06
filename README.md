@@ -2,7 +2,7 @@
 
 A clean, interactive web application that calculates the contrast ratio between two colors based on the [WCAG (Web Content Accessibility Guidelines)](https://www.w3.org/WAI/standards-guidelines/wcag/) formula. This helps designers and developers ensure their color choices are accessible to users with visual impairments.
 
-**Live Demo: [View the Calculator]([https://yourusername.github.io/color-contrast-calculator/](https://ozias-tumimana.github.io/color-contrast-calculator/))**
+**Live Demo: [View the Calculator](https://ozias-tumimana.github.io/color-contrast-calculator/)**
 
 ![Screenshot of the Color Contrast Calculator](images/screenshot.png) 
 

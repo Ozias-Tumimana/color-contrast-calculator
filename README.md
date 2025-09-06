@@ -23,7 +23,7 @@ The tool uses the WCAG 2.1 formula for calculating contrast:
 ## Technologies Used
 
 - **HTML5:** For structure and the native color `<input>` type.
-- **CSS3:** For styling and layout.
+- **CSS3:** For styling and modern layout, using **Flexbox** for alignment and responsiveness.
 - **Vanilla JavaScript:** For implementing the contrast algorithm and DOM manipulation.
 
 ## How to Run Locally

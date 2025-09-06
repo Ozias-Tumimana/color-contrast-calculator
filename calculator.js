@@ -1,6 +1,3 @@
-//  Name: Ozias Tumimana
-//  Date: 09 /03 / 2024
-//  Section: CSE 190E
 //  This is the calulator.js page for my color contrast calculator.The purpose of this
 //  page is to store javascript code that will be used once a user clicks a button
 //  wthin the page.
@@ -76,4 +73,5 @@ window.onload = function() {
         "with your current color configuration";
     }
   }
+
 }

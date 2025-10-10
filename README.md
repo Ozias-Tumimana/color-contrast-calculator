@@ -6,11 +6,11 @@ A modern, interactive web application designed to help developers and designers 
 
 -----
 
-## ✨ Live Demo & Quick Links
+## ✨ Project Showcase
 
-| Live Demo | Source Code | Technical Focus |
-| :---: | :---: | :---: |
-| **[View the Calculator](https://ozias-tumimana.github.io/color-contrast-calculator/)** | [View Repository](https://github.com/Ozias-Tumimana/color-contrast-calculator) | JavaScript, WCAG 2.1 Compliance, CSS Grid |
+| Live Demo | Technical Focus |
+| :---: | :---: |
+| **[View the Calculator](https://ozias-tumimana.github.io/color-contrast-calculator/)** | JavaScript, WCAG 2.1 Compliance, CSS Grid |
 
 -----
 

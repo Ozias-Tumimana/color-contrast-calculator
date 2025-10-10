@@ -1,45 +1,58 @@
-# Color Contrast Calculator
+# 🎨 WCAG 2.1 Color Contrast Checker
 
-A clean, interactive web application that calculates the contrast ratio between two colors based on the [WCAG (Web Content Accessibility Guidelines)](https://www.w3.org/WAI/standards-guidelines/wcag/) formula. This helps designers and developers ensure their color choices are accessible to users with visual impairments.
+## **A Real-Time Accessibility Compliance Tool**
 
-**Live Demo: [View the Calculator](https://ozias-tumimana.github.io/color-contrast-calculator/)**
+A modern, interactive web application designed to help developers and designers verify color choices against **WCAG 2.1 standards**. This tool demonstrates strong **Vanilla JavaScript** logic, accessibility best practices, and clean, responsive UI/UX.
 
-![Screenshot of the Color Contrast Calculator](images/screenshot.png) 
+-----
 
-## Features
+## ✨ Project Showcase
 
-- **Real-time Calculation:** Input colors using native color pickers and see the ratio update instantly.
-- **WCAG Compliance Feedback:** The calculated ratio is displayed clearly.
-- **Live Preview:** The page's background and text colors change to provide a visual example of the chosen color combination.
-- **Built with Vanilla JS:** Implements the precise WCAG luminosity contrast algorithm without external libraries.
+| Live Demo | Technical Focus |
+| :---: | :---: |
+| **[View the Calculator](https://ozias-tumimana.github.io/color-contrast-calculator/)** | JavaScript, WCAG 2.1 Compliance, CSS Grid |
 
-## How It Works
+-----
 
-The tool uses the WCAG 2.1 formula for calculating contrast:
-1.  Converts hex codes from the color inputs into sRGB values.
-2.  Calculates the relative luminance of each color.
-3.  Computes the contrast ratio using the formula: `(L1 + 0.05) / (L2 + 0.05)` where `L1` is the luminance of the lighter color and `L2` is the luminance of the darker color.
+## 🚀 Key Features & Technical Highlights
 
-## Technologies Used
+This project showcases a professional approach to front-end development:
 
-- **HTML5:** For structure and the native color `<input>` type.
-- **CSS3:** For styling and modern layout, using **Flexbox** for alignment and responsiveness.
-- **Vanilla JavaScript:** For implementing the contrast algorithm and DOM manipulation.
+  * **Real-Time Calculations:** Uses **Vanilla JavaScript event listeners** (`'input'`) to instantly calculate the contrast ratio as the user manipulates the color pickers, eliminating the need for a "Calculate" button.
+  * **Comprehensive Compliance Grid:** Displays **explicit Pass/Fail status** for all four key WCAG 2.1 success criteria: AA Normal Text ($\ge 4.5:1$), AA Large Text ($\ge 3.0:1$), AAA Normal Text ($\ge 7.0:1$), and AAA Large Text ($\ge 4.5:1$).
+  * **Color Swapper Feature:** Includes a button to instantly **swap the foreground and background colors**, aiding rapid design iteration.
+  * **Modern Layout:** Implemented using **CSS Grid and Flexbox** for a two-column, adaptive design that is clean, organized, and fully responsive across mobile and desktop.
+  * **Live Preview:** The entire preview box updates its background and text colors immediately, providing an accurate visual reference.
 
-## How to Run Locally
+-----
+
+## 💻 How The Calculation Works
+
+The application uses the precise **WCAG 2.1 luminosity contrast algorithm**, implemented entirely in JavaScript:
+
+1.  **Hex to sRGB Conversion:** Color picker hex codes are converted to discrete RGB values.
+2.  **Relative Luminance ($\text{L}$):** A custom function determines the relative luminance for each color using standard sRGB component formulas.
+3.  **Contrast Ratio:** The final ratio is computed using the formula: $(\text{L}_{lighter} + 0.05) / (\text{L}_{darker} + 0.05)$.
+4.  **Conditional Logic:** The resulting ratio drives the conditional rendering (red/green indicators) for the four compliance standards.
+
+-----
+
+## 🛠️ Technology Stack
+
+  * **HTML5:** Structured the application with semantic tags.
+  * **CSS3:** Utilized **CSS Grid, Flexbox,** and custom styling for a clean, professional UI.
+  * **Vanilla JavaScript (ES6+):** Implemented all core logic, event handling, and DOM manipulation without external libraries, showcasing core language proficiency.
+
+-----
+
+## 🏃 How to Run Locally
 
 1.  Clone this repository:
     ```bash
-    git clone https://github.com/yourusername/color-contrast-calculator.git
+    git clone https://github.com/Ozias-Tumimana/color-contrast-calculator.git
     ```
 2.  Navigate to the project directory:
     ```bash
     cd color-contrast-calculator
     ```
-3.  Open the `index.html` file in your web browser.
-
-## Future Enhancements
-
-- Explicitly display pass/fail status for WCAG AA and AAA compliance levels for normal and large text.
-- Allow users to input color hex codes manually via text input.
-- Provide a history of recently calculated color pairs.
+3.  Open the `calculator.html` file in your web browser.

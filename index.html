@@ -1,47 +1,74 @@
 <!DOCTYPE html>
-<!--
-This is the calculator.html page for my color contrast calculator. The purpose of this
-website is to inform the user weather their inputed background/foreground colors
-are accessible.
--->
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="calculator.css" rel="stylesheet">
-        <script src="calculator.js"></script>
-        <title>Color Contrast Checker</title>
+        <script src="calculator.js" defer></script>
+        <title>WCAG Color Contrast Checker</title>
     </head>
     <body id="webpage">
-        <div id="wrapper">
-        <header class="title">
-            <h1> Color Contrast Calculator</h1>
-            <hr id="headingbreak">
+        
+        <header>
+            <h1>WCAG Color Contrast Checker</h1>
+            <p>Calculate and verify accessibility standards in real-time.</p>
         </header>
-        <div class="userinputs">
-            <label for="backgroundcolor" class="colorlabel"><strong>Background Color:</strong>
-            </label>
-            <hr class="invisible">
-            <input type="color" id="backgroundcolor">
-            <hr class="invisible">
-            <label for="foregroundcolor" class="colorlabel"> <strong>Foreground color: </strong>
-            </label>
-            <hr class="invisible">
-            <input type="color" id="foregroundcolor">
-            <hr class="invisible">
-            <button id="log">Calculate Contrast</button>
-        </div>
-        <article class="buttonpressed">
-            <h2 id="accessiblity">Pick Two Different Colors!</h2>
+        
+        <main id="app-container">
+            
+            <section class="user-inputs">
+                <div class="input-group">
+                    <label for="backgroundcolor">Background Color:</label>
+                    <input type="color" id="backgroundcolor" value="#FFFFFF">
+                    <p class="hex-value" id="bg-hex">#FFFFFF</p>
+                </div>
 
-            <h3 id="resultratio"></h3>
-        </article>
-        <div id="box">
-            <p id="examplebox"></p>
-        </div>
-        </div>
+                <div class="input-group">
+                    <label for="foregroundcolor">Foreground Color:</label>
+                    <input type="color" id="foregroundcolor" value="#000000">
+                    <p class="hex-value" id="fg-hex">#000000</p>
+                </div>
+                
+                <button id="swap-colors">Swap Colors</button>
+                
+            </section>
+            
+            <section class="results-showcase">
+                
+                <div id="results-panel">
+                    <h2 id="ratio-display"></h2>
+                    <h3 id="compliance-message">Calculating...</h3>
+                </div>
+                
+                <div class="compliance-grid">
+                    <div class="compliance-item">
+                        <span id="aa-small" class="compliance-status"></span>
+                        <p>AA (Normal Text)</p>
+                    </div>
+                    <div class="compliance-item">
+                        <span id="aa-large" class="compliance-status"></span>
+                        <p>AA (Large Text)</p>
+                    </div>
+                    <div class="compliance-item">
+                        <span id="aaa-small" class="compliance-status"></span>
+                        <p>AAA (Normal Text)</p>
+                    </div>
+                    <div class="compliance-item">
+                        <span id="aaa-large" class="compliance-status"></span>
+                        <p>AAA (Large Text)</p>
+                    </div>
+                </div>
+
+                <article id="example-box">
+                    <p>This is a live example of text displayed with your current color configuration. Contrast is essential for accessibility.</p>
+                </article>
+                
+            </section>
+            
+        </main>
+        
         <footer>
-            All &copy; belonging to 2024 Ozias Tumimana
+            All &copy; belonging to 2024 Ozias Tumimana | WCAG 2.1 Standard
         </footer>
     </body>
 </html>
-

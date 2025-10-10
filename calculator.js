@@ -1,77 +1,115 @@
-//  This is the calulator.js page for my color contrast calculator.The purpose of this
-//  page is to store javascript code that will be used once a user clicks a button
-//  wthin the page.
-
+/* WCAG Color Contrast Logic (unchanged core math) */
 function norm(colorValue) {
-  if (colorValue <= 0.04045) {
-    colorValue /= 12.92;
-  } else {
-    colorValue = ((colorValue + 0.055) / 1.055) ** 2.4;
-  }
-  return colorValue;
+    if (colorValue <= 0.04045) {
+        colorValue /= 12.92;
+    } else {
+        colorValue = ((colorValue + 0.055) / 1.055) ** 2.4;
+    }
+    return colorValue;
 }
 
 function lum(R, G, B) {
-  return (0.2126 * norm(R / 255)) + (0.7152 * norm(G / 255)) + (0.0722 * norm(B / 255));
+    return (0.2126 * norm(R / 255)) + (0.7152 * norm(G / 255)) + (0.0722 * norm(B / 255));
 }
-let ratio = 0;
+
 function contrast(c1Red, c1Green, c1Blue, c2Red, c2Green, c2Blue) {
-  if (lum(c1Red, c1Green, c1Blue) > lum(c2Red, c2Green, c2Blue)) {
-    ratio = (lum(c1Red, c1Green, c1Blue) + 0.05) / (lum(c2Red, c2Green, c2Blue) + 0.05);
-  } else if (lum(c1Red, c1Green, c1Blue) <= lum(c2Red, c2Green, c2Blue)) {
-    ratio = (lum(c2Red, c2Green, c2Blue) + 0.05) / (lum(c1Red, c1Green, c1Blue) + 0.05);
-  }
-  return ratio;
+    const l1 = lum(c1Red, c1Green, c1Blue);
+    const l2 = lum(c2Red, c2Green, c2Blue);
+    const brightest = Math.max(l1, l2);
+    const darkest = Math.min(l1, l2);
+    return (brightest + 0.05) / (darkest + 0.05);
 }
-window.onload = function() {
-  let logButton = document.getElementById("log");
-  let storedBackground = document.getElementById("backgroundcolor");
-  let storedForeground = document.getElementById("foregroundcolor");
-  let printRatio = document.getElementById("resultratio");
-  let exampleBox = document.getElementById("examplebox");
-  let accessiblityReport = document.getElementById("accessiblity");
-  let ratioContainer = document.getElementById("box");
-  let webPage = document.getElementById("webpage");
-  let headerUnlineColor = document.getElementById("headingbreak");
-  let resultBorder = document.getElementById("buttonpressed")
-  logButton.onclick = function() {
 
-    //  Converts Background RGB Hexidecimal codes from strings to numbers
+/* DOM Manipulation and Application Logic */
+function hexToRgb(hex) {
+    // Ensures color is 7 chars long (#RRGGBB)
+    hex = hex.startsWith('#') ? hex : '#' + hex;
+    const bigint = parseInt(hex.slice(1), 16);
+    return {
+        r: (bigint >> 16) & 255,
+        g: (bigint >> 8) & 255,
+        b: bigint & 255
+    };
+}
 
-    let rBackground = Number("0x" + storedBackground.value.substr(1, 2));
-    let gBackground = Number("0x" + storedBackground.value.substr(3, 2));
-    let bBackground = Number("0x" + storedBackground.value.substr(5, 2));
+function checkCompliance(ratio) {
+    return {
+        aa_small: ratio >= 4.5, // AA Normal Text
+        aa_large: ratio >= 3.0, // AA Large Text (18pt or 14pt bold)
+        aaa_small: ratio >= 7.0, // AAA Normal Text
+        aaa_large: ratio >= 4.5 // AAA Large Text
+    };
+}
 
-    //  Converts foreground RGB Hexidecimal codes from strings to numbers
+function updateResults() {
+    const bgInput = document.getElementById("backgroundcolor");
+    const fgInput = document.getElementById("foregroundcolor");
+    const bgHex = bgInput.value;
+    const fgHex = fgInput.value;
 
-    let rForeground = Number("0x" + storedForeground.value.substr(1, 2));
-    let gForeground = Number("0x" + storedForeground.value.substr(3, 2));
-    let bForeground = Number("0x" + storedForeground.value.substr(5, 2));
+    document.getElementById("bg-hex").textContent = bgHex;
+    document.getElementById("fg-hex").textContent = fgHex;
 
-    //  Define + calculates contrast variable + prints contrast ratio
-    let theratio = contrast(
-      rBackground, gBackground, bBackground,
-      rForeground, gForeground, bForeground
-    ).toFixed(2);
+    const bgRgb = hexToRgb(bgHex);
+    const fgRgb = hexToRgb(fgHex);
 
-    //    If statement that allows innerHTML & CSS to change if user inputs valid colors
-
-    if (storedBackground.value === storedForeground.value) {
-      exampleBox.innerHTML = "Please choose two non-identical color values c:";
-    } else {
-
-      //    Sets webpage background and text color to user choice & Prints example box
-
-      webPage.style = "background-color: " + storedBackground.value + "; color: " +
-      storedForeground.value + ";";
-      headerUnlineColor.style = "border-color: " + storedForeground.value + ";";
-      ratioContainer.style = "border: 5px ridge; border-color: " + storedForeground.value +
-        "; margin-top: 75px;";
-      accessiblityReport.innerHTML = "Contrast Ratio";
-      printRatio.innerHTML = theratio + ":1";
-      exampleBox.innerHTML = "This is an example of a paragraph " +
-        "with your current color configuration";
+    if (bgHex === fgHex) {
+        document.getElementById("compliance-message").textContent = "Error: Colors are identical!";
+        document.getElementById("ratio-display").textContent = "1.00:1";
+        // Reset all compliance indicators to gray
+        document.querySelectorAll('.compliance-status').forEach(el => el.style.backgroundColor = 'gray');
+        return;
     }
-  }
 
+    const ratio = contrast(
+        bgRgb.r, bgRgb.g, bgRgb.b,
+        fgRgb.r, fgRgb.g, fgRgb.b
+    ).toFixed(2);
+    
+    // Update Example Box
+    const exampleBox = document.getElementById("example-box");
+    exampleBox.style.backgroundColor = bgHex;
+    exampleBox.style.color = fgHex;
+
+    // Update Results Panel
+    document.getElementById("ratio-display").textContent = `${ratio}:1`;
+    
+    const compliance = checkCompliance(ratio);
+    
+    // Set compliance message based on highest compliance level achieved
+    if (compliance.aaa_small) {
+        document.getElementById("compliance-message").textContent = "Excellent! Meets AAA Standard.";
+        document.getElementById("compliance-message").style.color = 'green';
+    } else if (compliance.aa_small) {
+        document.getElementById("compliance-message").textContent = "Passes AA Standard. Good!";
+        document.getElementById("compliance-message").style.color = 'orange';
+    } else {
+        document.getElementById("compliance-message").textContent = "Fails WCAG AA. Poor Contrast.";
+        document.getElementById("compliance-message").style.color = 'red';
+    }
+
+    // Update Compliance Grid Status
+    document.getElementById("aa-small").style.backgroundColor = compliance.aa_small ? 'green' : 'red';
+    document.getElementById("aa-large").style.backgroundColor = compliance.aa_large ? 'green' : 'red';
+    document.getElementById("aaa-small").style.backgroundColor = compliance.aaa_small ? 'green' : 'red';
+    document.getElementById("aaa-large").style.backgroundColor = compliance.aaa_large ? 'green' : 'red';
+}
+
+function swapColors() {
+    const bgInput = document.getElementById("backgroundcolor");
+    const fgInput = document.getElementById("foregroundcolor");
+    const temp = bgInput.value;
+    bgInput.value = fgInput.value;
+    fgInput.value = temp;
+    updateResults(); // Recalculate and update the display
+}
+
+// Event Listeners (Runs once the page is loaded)
+window.onload = function() {
+    // Run an initial calculation
+    updateResults();
+
+    document.getElementById("backgroundcolor").addEventListener('input', updateResults);
+    document.getElementById("foregroundcolor").addEventListener('input', updateResults);
+    document.getElementById("swap-colors").addEventListener('click', swapColors);
 }

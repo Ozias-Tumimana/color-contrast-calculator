@@ -1,75 +1,199 @@
 /*
-This is the calculator.css page for my color contrast calculator. The purpose of this
-page is to store design elements to make my page more asthetically pleasing. */
+This is the calculator.css page for my color contrast calculator.
+Uses CSS Grid for modern layout and emphasizes the results.
+*/
 
-#webpage {
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0px;
-}
-
-.title {
     text-align: center;
 }
 
-#headingbreak {
-    width: 500px;
+header {
+    width: 100%;
+    padding: 20px 0;
+    background-color: #248f84; /* Your theme color */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
 }
 
-.userinputs {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
 }
 
-.invisible {
-    border: none;
-}
-
-hr {
-    margin-bottom: 15px;
-}
-
-#colorlabel {
-    font-size: larger;
-}
-
-input {
-    width: 100px;
-    height: 50px;
-}
-
-#log {
-    margin-top: 8px;
-    width: 15em;
-    text-align: center;
-    margin-bottom: 100px;
-}
-
-.buttonpressed {
-    text-align: center;
-}
-
-#resultratio {
-    font-size: xx-large;
-}
-
-.box {
-    display: flex;
-}
-
-#examplebox {
-    text-align: center;
-    text-wrap: pretty;
-}
-
-footer {
-    height: 15px;
-    width: 500px;
-    text-align: center;
+header p {
     margin-top: 5px;
+}
+
+#app-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Input column (1) | Results column (2) */
+    gap: 40px;
+    width: 90%;
+    max-width: 1000px;
+    margin-bottom: 50px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+/* -------------------- Input Section -------------------- */
+.user-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.colorlabel, .input-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+input[type="color"] {
+    width: 100%; /* Fill the container */
+    height: 40px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    padding: 0;
     margin-bottom: 5px;
 }
 
+.hex-value {
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #555;
+}
 
+#swap-colors {
+    padding: 10px 20px;
+    background-color: #248f84;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+#swap-colors:hover {
+    background-color: #1a6b63;
+}
+
+/* -------------------- Results Section -------------------- */
+.results-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#results-panel {
+    background-color: white;
+    border: 2px solid #248f84;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#ratio-display {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+}
+
+#compliance-message {
+    font-size: 1.2em;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Compliance Grid */
+.compliance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    text-align: left;
+}
+
+.compliance-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95em;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.compliance-status {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; /* Circle indicator */
+    flex-shrink: 0;
+}
+
+/* Example Box */
+#example-box {
+    padding: 30px;
+    border-radius: 8px;
+    min-height: 150px;
+    font-size: 1.2em;
+    font-weight: 500;
+    display: flex;
+    align-items: center; /* Center text vertically */
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s;
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    padding: 10px 0;
+    margin-top: auto;
+    background-color: #333;
+    color: #ccc;
+    font-size: 0.8em;
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 600px) {
+    #app-container {
+        grid-template-columns: 1fr; /* Stack columns vertically on mobile */
+        border-right: none;
+    }
+    
+    .user-inputs {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+    }
+
+    .hero-section {
+        flex-direction: column;
+    }
+}

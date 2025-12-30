@@ -1,4 +1,4 @@
-/* WCAG Color Contrast Logic (unchanged core math) */
+/* WCAG Color Contrast Logic
 function norm(colorValue) {
     if (colorValue <= 0.04045) {
         colorValue /= 12.92;
@@ -112,4 +112,5 @@ window.onload = function() {
     document.getElementById("backgroundcolor").addEventListener('input', updateResults);
     document.getElementById("foregroundcolor").addEventListener('input', updateResults);
     document.getElementById("swap-colors").addEventListener('click', swapColors);
+
 }
